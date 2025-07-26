@@ -1,18 +1,16 @@
-# this file is to run required containers for the project eg: sql server for development
 services:
-  mysql:
-    image: mysql:latest
-    container_name: mysql-db
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: jobghar
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jobghar
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data_jobghar:/var/lib/mysql
+      - postgres_data_jobghar:/var/lib/postgresql/data
 
 volumes:
-  mysql_data_jobghar:
+  postgres_data_jobghar:
