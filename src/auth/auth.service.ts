@@ -50,7 +50,6 @@ export class AuthService {
             secret: process.env.JWT_ACCESS_SECRET,
             expiresIn: process.env.JWT_ACCESS_EXPIRE,
         });
-
         await this.userService.setAccessToken(email, accessToken);
         return { accessToken };
     }
