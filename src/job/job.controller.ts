@@ -14,24 +14,10 @@ export class JobController {
   Get all active jobs --> this one is for all users
   */
   @ApiOperation({ summary: 'Get all active jobs' })
-  @ApiQuery({
-    name: 'limit',
-    required: false,
-    description: 'Number of users per page',
-    type: Number,
-  })
-  @ApiQuery({
-    name: 'page',
-    required: false,
-    description: 'Page number for pagination',
-    type: Number,
-  })
   @ApiResponse({ status: 200, description: 'List of active jobs' })
   @Get()
-  async getAllJobs(@Query() query: { page?: string; limit?: string }) {
-    const page = query.page && parseInt(query.page) > 0 ? parseInt(query.page) : 1;
-    const limit = query.limit && parseInt(query.limit) > 0 ? parseInt(query.limit) : 10;
-    const jobs = await this.jobService.getAllJobs(page, limit);
+  async getAllJobs() {
+    const jobs = await this.jobService.getAllJobs();
     return {
       success: true,
       message: 'Jobs fetched successfully',

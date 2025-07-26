@@ -49,24 +49,12 @@ export class JobService {
     }
   }
 
-  async getAllJobs(page: number, limit: number) {
+  async getAllJobs() {
     try {
-      const [data, totalCount] = await this.jobRepository.findAndCount({
+      return await this.jobRepository.find({
         where: { isActive: true },
-        take: limit,
-        skip: (page - 1) * limit,
-        order: { createdAt: 'DESC' },
-        relations: ['employer'],
+        order: { createdAt: 'DESC' }
       });
-
-      const totalPages = Math.ceil(totalCount / limit);
-
-      return {
-        data,
-        totalPages,
-        hasNextPage: page < totalPages,
-        hasPreviousPage: page > 1,
-      };
     } catch {
       throw new InternalServerErrorException('Failed to fetch jobs');
     }
