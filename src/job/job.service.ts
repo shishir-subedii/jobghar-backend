@@ -119,7 +119,6 @@ export class JobService {
   }
 
   async getJobsByEmployer(employerEmail: string) {
-    console.log('Employer email:', employerEmail);
     try {
       if (!employerEmail) {
         throw new BadRequestException('Employer email is required');

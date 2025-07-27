@@ -83,7 +83,6 @@ export class UserService {
         if (!isOldPasswordValid) {
             throw new BadRequestException('Old password is incorrect');
         }
-        console.log('Changing password for user:', user.email);
         const hashedPassword = await bcrypt.hash(body.newPassword, 10);
         user.password = hashedPassword;
         user.accessToken = null;
