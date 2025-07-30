@@ -26,7 +26,6 @@ export class ApplicationService {
       if (!applicant) {
         throw new BadRequestException('Applicant not found');
       }
-      const newCVPath = `${process.env.CV_BASE_URL}/${cvFilePath}`;
 
       //Check previous application
       const existingApplication = await this.applicationRepo.findOne({
@@ -52,7 +51,7 @@ export class ApplicationService {
         jobSlug: dto.jobSlug,
         coverLetter: dto.coverLetter,
         jobTitle: findJob.title,
-        cv: newCVPath,
+        cv: cvFilePath,
       });
 
       //change the job application counter to +1

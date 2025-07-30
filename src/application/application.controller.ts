@@ -58,7 +58,8 @@ export class ApplicationController {
     @UploadedFile() file: Express.Multer.File
   ) {
     const user = req['user'] as jwtPayloadType;
-    const application = await this.applicationService.apply(dto, user as jwtPayloadType, file.filename);
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+    const application = await this.applicationService.apply(dto, user as jwtPayloadType, imageUrl);
 
     return {
       success: true,
